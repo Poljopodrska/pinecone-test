@@ -1,11 +1,9 @@
-import pinecone
 import os
+from pinecone import Pinecone
 
-# Use direct environment variables (Render supports this)
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_ENV = os.getenv("PINECONE_ENV")  # e.g. "eu-west-1"
+# Initialize Pinecone (new SDK v3+)
+pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 
-pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
-
-print("✅ Pinecone initialized successfully")
-print("Indexes:", pinecone.list_indexes())
+# Try listing indexes to verify connectivity
+print("✅ Pinecone connected!")
+print("Indexes:", pc.list_indexes().names())
